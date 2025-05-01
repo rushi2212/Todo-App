@@ -30,6 +30,7 @@ h1 {
 
 .item {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #e0e0e0;
@@ -39,23 +40,63 @@ h1 {
     border-bottom: none;
 }
 
-.item input[type="checkbox"] {
-    margin-right: 15px;
-    transform: scale(1.2);
-}
-
-.item p {
-    margin: 0;
+.task-text {
     font-size: 16px;
     color: #555;
+    flex: 1;
+    text-align: left;
 }
 
-form {
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.icon-btn:hover {
+    color: #000;
+}
+
+.edit-form {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.edit-form input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.edit-form button {
+    padding: 8px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.edit-form button:hover {
+    background-color: #0056b3;
+}
+
+.add-form {
     display: flex;
     margin-top: 20px;
 }
 
-form input[type="text"] {
+.add-form input[type="text"] {
     flex: 1;
     padding: 10px;
     font-size: 16px;
@@ -64,7 +105,7 @@ form input[type="text"] {
     outline: none;
 }
 
-form button {
+.add-form button {
     padding: 10px 20px;
     font-size: 18px;
     background-color: #28a745;
@@ -75,11 +116,6 @@ form button {
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.add-form button:hover {
     background-color: #218838;
-}
-
-.task-checkbox:checked + .task-text {
-    text-decoration: line-through;
-    color: #999;
 }

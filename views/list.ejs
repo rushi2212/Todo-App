@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Todo list</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-    <div class="box">
-        <h1>Todo List</h1>
-    </div>
-    <div class="box">
+  <div class="box">
+    <h1>Todo List</h1>
 
-        <% ejes.forEach(function(items){ %>
-            <form action="/delete" method="POST">
-                <div class="item">
-                    <input type="checkbox" class="task-checkbox" name="checkbox1" value="<%= items._id %>" onchange="this.form.submit()">
-                    <p class="task-text"><%= items.name %></p>
-                </div>  
+    <% ejes.forEach(function(items) { %>
+      <div class="item">
+        <% if (items.editing) { %>
+          <form action="/edit/<%= items._id %>" method="POST" class="edit-form">
+            <input type="text" name="newName" value="<%= items.name %>" required />
+            <button type="submit"><i class="fas fa-check"></i></button>
+          </form>
+        <% } else { %>
+          <p class="task-text"><%= items.name %></p>
+          <div class="actions">
+            <a href="/edit/<%= items._id %>" class="icon-btn"><i class="fas fa-pen"></i></a>
+            <form action="/delete" method="POST" class="delete-form">
+              <input type="hidden" name="checkbox1" value="<%= items._id %>">
+              <button type="submit" class="icon-btn"><i class="fas fa-trash"></i></button>
             </form>
-        <% }) %>
-        <form action="/" method="POST">
-            <input type="text" name="ele1" placeholder="Enter a new task" >
-            <button type="submit">+</button>
-        </form>
-    </div>
+          </div>
+        <% } %>
+      </div>
+    <% }) %>
+
+    <form action="/" method="POST" class="add-form">
+      <input type="text" name="ele1" placeholder="Enter a new task" required>
+      <button type="submit">+</button>
+    </form>
+  </div>
 </body>
 </html>
