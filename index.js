@@ -5,6 +5,10 @@ const mongoose = require("mongoose");
 const app = express();
 const port = process.env.PORT || 3000;
 
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
+
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -39,7 +43,7 @@ app.post("/", async (req, res) => {
 });
 
 
-app.post("/delete", async (req, res) => {
+app.delete("/delete", async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.body.checkbox1);
     res.redirect("/");
@@ -56,7 +60,7 @@ app.get("/edit/:id", async (req, res) => {
 });
 
 
-app.post("/edit/:id", async (req, res) => {
+app.put("/edit/:id", async (req, res) => {
   const updatedName = req.body.newName.trim();
   if (updatedName) {
     await Task.findByIdAndUpdate(req.params.id, {
